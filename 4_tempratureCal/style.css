@@ -1,0 +1,43 @@
+#center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+    margin-left: 605px;
+    box-shadow: 6px 6px 490px rgb(0, 255, 234);
+    height: 295px;
+    width: 395px;
+}
+#kcenter{
+    font-size: 30px;
+    margin-left: 20px;
+}
+#for{
+    height: 20px;
+    border-width: 4px;
+    text-align: center;
+    width: 260px;
+}
+#forcelsuis{
+    height: 20px;
+    width: 50px;
+}
+#forfahrenheit{
+    height: 20px;
+    width: 50px;
+}
+label{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+#submit{
+    color:rgb(255, 255, 255);
+    background-color: rgb(56, 228, 213);
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 100px;
+    font-size: medium;
+    margin-left: 100px;
+
+}

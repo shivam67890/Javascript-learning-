@@ -1,0 +1,29 @@
+body{
+  background-color:rgba(255, 255, 255, 0.456);
+}
+#center{
+  color:black;
+  display: block;
+text-align: center;
+font-size: 100px;
+position: relative;
+  padding-top: 200px;
+}
+
+#number{
+  text-align: center;
+
+}
+.btn{
+  font-size: 70px;
+  border-color: black;
+  color: black;
+  background-color: rgba(68, 200, 244, 0.506);
+  border-radius: 4px;
+}
+.btn:hover{
+  background-color: black;
+  color:rgb(198, 189, 189);
+  border:none;
+  box-shadow: 3px 4px 8px rgb(0, 255, 255);
+}
