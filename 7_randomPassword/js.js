@@ -4,6 +4,7 @@ function generatePassword(passwordlength, includeLowercase, includeUppercase, in
     const numberchars = "123456890";
     const symbolchars = "!@#$%^&*()_+-=";
 
+
     let allowedchars = "";
     let password = "";
     allowedchars += includeLowercase ? Lowercasechars : "";//if(includeLowercase){
@@ -23,11 +24,11 @@ function generatePassword(passwordlength, includeLowercase, includeUppercase, in
     return password;
 }
 
-const passwordLength = 4;
-const includeLowercase = false;
-const includeUppercase = false;
+const passwordLength = 8;
+const includeLowercase = true;
+const includeUppercase = true;
 const includeNumber = true;
-const includeSymbols = false;
+const includeSymbols = true;
 
 const abx = generatePassword(
     passwordLength,
@@ -37,7 +38,7 @@ const abx = generatePassword(
     includeSymbols,
 )
 
-console.log(`generated password ${abx}`);
+console.log(`generated password  ${abx}`);
 
 
 
