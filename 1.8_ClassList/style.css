@@ -1,0 +1,22 @@
+/* body {
+    margin: 0;
+    height: 100vh; Set the body height to full viewport height
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+  
+  #mybtn {
+    color: white;
+    background-color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 30px;
+  }
+
+  .enabled{
+    background-color: red;
+    color: aqua;
+  }

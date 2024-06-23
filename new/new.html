@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Game</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  #game-container {
+    position: relative;
+    width: 80vw;
+    height: 80vh;
+    border: 2px solid black;
+    background-color: white;
+  }
+  #hii {
+    width: 50px;
+    height: 50px;
+    background-color: lightblue;
+    font-size: 2rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    display: flex;
+  }
+  .fire {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: absolute;
+  }
+  #target {
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    position: absolute;
+  }
+  #message {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5rem;
+    color: red;
+  }
+</style>
+</head>
+<body>
+<div id="game-container">
+  <div id="hii">😁</div>
+  <div id="target"></div>
+  <div id="message"></div>
+</div>
+
+<script>
+  // Game setup
+  const newele = document.getElementById("hii");
+  const target = document.getElementById("target");
+  const message = document.getElementById("message");
+  const gameContainer = document.getElementById("game-container");
+  const fireCount = 15; // Number of fire elements
+  const fireElements = [];
+
+  // Initialize positions and constants
+  const moveob = 10;
+  let x = 0;
+  let y = 0;
+  let targetX = Math.floor(Math.random() * (gameContainer.clientWidth - 50));
+  let targetY = Math.floor(Math.random() * (gameContainer.clientHeight - 50));
+  let startTime = null;
+  let gameOver = false;
+
+  target.style.left = `${targetX}px`;
+  target.style.top = `${targetY}px`;
+
+  // Create and position fire elements
+  for (let i = 0; i < fireCount; i++) {
+    const fire = document.createElement("div");
+    fire.classList.add("fire");
+    const fireX = Math.floor(Math.random() * (gameContainer.clientWidth - 50));
+    const fireY = Math.floor(Math.random() * (gameContainer.clientHeight - 50));
+    fire.style.left = `${fireX}px`;
+    fire.style.top = `${fireY}px`;
+    gameContainer.appendChild(fire);
+    fireElements.push(fire);
+  }
+
+  // Function to check collision
+  function isCollision(rect1, rect2) {
+    return !(rect1.right < rect2.left || 
+             rect1.left > rect2.right || 
+             rect1.bottom < rect2.top || 
+             rect1.top > rect2.bottom);
+  }
+
+  // Event listener for keydown and keyup
+  document.addEventListener('keydown', event => {
+    if (gameOver) return;
+
+    // Start the timer on the first key press
+    if (startTime === null) {
+      startTime = new Date();
+    }
+
+    // Change content and background color
+    newele.textContent = 'let`s go🫡';
+    newele.style.backgroundColor = 'tomato';
+
+    // Handle arrow keys for movement
+    if (event.key.startsWith("Arrow")) {
+        switch (event.key) {
+            case "ArrowUp":
+                y -= moveob;
+                break;
+            case "ArrowDown":
+                y += moveob;
+                break;
+            case "ArrowLeft":
+                x -= moveob;
+                break;
+            case "ArrowRight":
+                x += moveob;
+                break;
+        }
+        // Ensure the element stays within the game container
+        x = Math.max(0, Math.min(x, gameContainer.clientWidth - newele.clientWidth));
+        y = Math.max(0, Math.min(y, gameContainer.clientHeight - newele.clientHeight));
+
+        newele.style.top = `${y}px`;
+        newele.style.left = `${x}px`;
+
+        const playerRect = newele.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+
+        // Check if the player has reached the target
+        if (isCollision(playerRect, targetRect)) {
+            const endTime = new Date();
+            const timeTaken = ((endTime - startTime) / 1000).toFixed(2);
+            message.textContent = `You reached the target in ${timeTaken} seconds!`;
+            gameOver = true;
+            return;
+        }
+
+        // Check if the player has collided with fire
+        for (let fire of fireElements) {
+            const fireRect = fire.getBoundingClientRect();
+            if (isCollision(playerRect, fireRect)) {
+                message.textContent = 'Game Over! You touched the fire!';
+                gameOver = true;
+                return;
+            }
+        }
+    }
+  });
+
+  document.addEventListener('keyup', event => {
+    if (gameOver) return;
+
+    // Revert content and background color
+    newele.textContent = '😁';
+    newele.style.backgroundColor = 'lightblue';
+
+
+    
+  });
+</script>
+</body>
+</html>
